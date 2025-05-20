@@ -1,0 +1,11 @@
+import { User } from "./user";
+import { Student } from "./student";
+ 
+export type Project = {
+    id: number;
+    title: string;
+    details: string;
+    student: Student;
+    // year: int;
+    author: User;
+};
