@@ -6,6 +6,6 @@ export type Project = {
     title: string;
     details: string;
     student: Student;
-    // year: int;
+    year: number;
     author: User;
 };
