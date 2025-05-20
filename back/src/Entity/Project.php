@@ -8,40 +8,77 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    forceEager: false
+)]
 class Project
 {
+    #[Groups('read')]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4, max: 255)]
     private ?string $title = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max : 5000)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s.,;:!?()\-]+$/',
+        message: 'The details can only contain letters, numbers, and basic punctuation.'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[^<>]*$/',
+        message: 'The details cannot contain HTML tags.'
+    )]
     private ?string $details = null;
 
     /**
      * @var Collection<int, Student>
      */
+    #[Groups(['read', 'write'])]
     #[ORM\ManyToMany(targetEntity: Student::class, inversedBy: 'projects')]
     private Collection $students;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'L\'année doit être comprise entre {{ min }} et {{ max }}.',
+    )]
     private ?int $year = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::ARRAY)]
+    #[Assert\NotBlank]
+    #[Assert\Count(
+        min: 1,
+        minMessage: 'The stack must contain at least one item.',
+    )]
     private array $stack = [];
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
 
     /**
      * @var Collection<int, Media>
      */
+    #[Groups(['read', 'write'])]
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'project')]
     private Collection $medias;
 
