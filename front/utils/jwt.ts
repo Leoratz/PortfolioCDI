@@ -3,7 +3,7 @@
 // import { jwtVerify } from "jose";
 // import { cookies } from "next/headers";
  
-// const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
+// const key = new TextEncoder().encode(process.env.JWT_SECRET);
  
 // // Read the JWT
 // export async function decrypt(input: string): Promise<any> {

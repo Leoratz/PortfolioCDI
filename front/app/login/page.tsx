@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 
+import { createCookie } from "@/utils/jwt";
+import { redirect } from "next/navigation";
+
 export default function Login() {
   const [response, setResponse] = useState<string>("");
 
@@ -29,7 +32,8 @@ export default function Login() {
     if (register.ok) {
       // Récupération du token
       const token = data.token;
-      console.log(token);
+      createCookie(token); // Crée le cookie avec le token
+      redirect("/"); // Redirige vers la page d'accueil
     } else {
       console.error(data);
       if (data.message) {
