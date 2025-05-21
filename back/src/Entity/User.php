@@ -25,11 +25,11 @@ use ApiPlatform\Metadata\ApiResource;
 #[UniqueEntity('email', message: 'Cette adresse email est déjà utilisée.')]
 #[ApiResource(
     operations: [
-        new GetCollection(),
-        new Post(processor: UserPasswordHasherProcessor::class),
-        new Get(),
-        new Patch(processor: UserPasswordHasherProcessor::class),
-        new Delete(),
+        new GetCollection(security: "is_granted('ROLE_ADMIN')"),
+        new Post(processor: UserPasswordHasherProcessor::class, security: "is_granted('ROLE_ADMIN')"),
+        new Get(security: "is_granted('ROLE_ADMIN')"),
+        new Patch(processor: UserPasswordHasherProcessor::class, security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
     ],
 
     normalizationContext: ['groups' => ['read']],
