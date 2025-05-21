@@ -1,32 +1,82 @@
 import React from 'react';
 import Forms from '@/components/Forms';
 import Projects from '@/components/Projects';
-export default function HomePage() { 
+import Programs from '@/components/Programs';
+import HomePresentation from '@/components/HomePresentation';
+import { FaCode } from "react-icons/fa";
+import { MdDataObject } from "react-icons/md";
+import { CiMobile2 } from "react-icons/ci";
+import { GrShieldSecurity } from "react-icons/gr";
 
+
+
+
+export default function HomePage() { 
     const falseJson = [
         {
-            "title": "Formulaire de contact",
+            "title": "Architecture web",
             "details": "Formulaire de contact pour les demandes de renseignements",
             "link": "/contact",
-            "image": "https://example.com/image1.jpg",
+            "image": "/images/microprocessor.jpg",
             
 
         },
         {
-            "title": "Formulaire de contact 2",
+            "title": "Fullstack",
             "details": "Formulaire de contact pour les demandes de renseignements",
             "link": "/contact2",
             "year": "Année 2",
             "technologies": ["React", "Next.js"],
-            "image": "https://example.com/image2.jpg",
+            "image": "images/student.avif",
+        },
+        {
+            "title": "Apprendre le SEO",
+            "details": "Formulaire de contact pour les demandes de renseignements",
+            "link": "/contact2",
+            "year": "Année 2",
+            "technologies": ["React", "Next.js"],
+            "image": "images/microprocessor.jpg",
+        },
+        {
+            "title": "Sécurisé un site web",
+            "details": "Formulaire de contact pour les demandes de renseignements",
+            "link": "/contact2",
+            "year": "Année 2",
+            "technologies": ["React", "Next.js"],
+            "image": "images/microprocessor.jpg",
         },
     ]
+    
 
+    const listPrograms = [
+        {
+            "title": "Fullstack web developpement",
+            "description": "Formulaire de contact pour les demandes de renseignements ",
+            "icon": <FaCode />,
+        },
+        {
+            "title": "Data Science et IA",
+            "description": "Formulaire de contact pour les demandes de renseignements",
+            "icon": <MdDataObject />,
+        },
+        {
+            "title": "Cyber sécurité",
+            "description": "Formulaire de contact pour les demandes de renseignements",
+            "icon": <GrShieldSecurity />,
+        },
+        {
+            "title": "Développement d'applicaiton mobile",
+            "description": "Formulaire de contact pour les demandes de renseignements",
+            "icon": <CiMobile2 />,
+        },
+    ]
     console.log(typeof falseJson);
 
     return (
         <>
-        <Projects project={falseJson} />
+        <HomePresentation />
+        <Programs listPrograms={listPrograms} />
+        <Projects projects={falseJson} />
         <Forms />
         </>
     );

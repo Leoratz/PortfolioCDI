@@ -1,12 +1,12 @@
 export default function Forms() {   
     return (
         // La div qui reprend le formulaire de contact
-        <div className="w-full bg-white items-center justify-center  "> 
+        <div className="w-full bg-white flex flex-col gap-6  "> 
             {/* La div qui reprend le titre et le sous-titre */}
             <div className=" flex flex-col justify-center items-center gap-1 py-4">
-                <p className=" font-semibold text-sm text-center"> CONTACTEZ NOUS</p>
+                <p className=" font-semibold text-sm text-center uppercase"> Contactez-nous</p>
                 <p className=" font-bold text-2xl text-center">Prêt à rejoindre l&apos;aventure ? </p>
-                <p className=" font-normal text-md text-center w-1/2">Laisser un message à notre admission pour en savoir plus sur notre programme et le processus d&apos;admission </p>
+                <p className=" font-normal text-md text-center text-gray-600 w-1/2">Laisser un message à notre admission pour en savoir plus sur notre programme et le processus d&apos;admission </p>
             </div>
           {/* La div qui reprend les contacts de l'école et le formulaire de contact */}
             <div className=" grid grid-cols-2 w-full justify-center px-26 ">
