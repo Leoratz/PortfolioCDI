@@ -42,21 +42,21 @@ export default function AddProject() {
               className="border border-gray-300 rounded px-3 py-1 text-black "
             />
             <br />
-            <label htmlFor="content" className="text-black">
-              Contenu
+            <label htmlFor="details" className="text-black">
+              Description
             </label>
             <textarea
-              id="content"
-              name="content"
+              id="details"
+              name="details"
               className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-none "
             ></textarea>
             <br />
-            <label htmlFor="student" className="text-black">
-              Project Name
+            <label htmlFor="students" className="text-black">
+              Etudiants
             </label>
             <select
-              id="projectName"
-              name="projectName"
+              id="students"
+              name="students"
               className="border border-gray-300 rounded px-3 py-2 text-black"
             >
               {projects.map((project: any) => (
@@ -66,16 +66,51 @@ export default function AddProject() {
               ))}
             </select>
             <br />
-            <label htmlFor="student" className="text-black">
-              Student
+            <label htmlFor="students" className="text-black">
+              Année d&apos;étude
+            </label>
+            <select
+              id="students"
+              name="students"
+              className="border border-gray-300 rounded px-3 py-2 text-black"
+            >
+              {projects.map((project: any) => (
+                <option value={project["@id"]} key={project.id} className="text-black">
+                  {project.name}
+                </option>
+              ))}
+            </select>
+            <br />
+            <label htmlFor="stack" className="text-black">
+              Technologies
             </label>
             <input
               type="text"
-              id="student"
-              name="student"
+              id="stack"
+              name="stack"
               className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <br />
+            <label htmlFor="link" className="text-black">
+              Lien du projet
+            </label>
+            <input
+              type="text"
+              id="link"
+              name="link"
+              className="border border-gray-300 rounded px-3 py-1 text-black "
+            />
+            <br />
+            <label htmlFor="images" className="text-black">
+              Images du projet
+            </label>
+            <input
+              type="file"
+              multiple
+              id="images"
+              name="images"
+              className="border border-gray-300 rounded px-3 py-1 text-black "
+            />
             <button
               type="submit"
               className="bg-orange-500 rounded px-4 py-1 hover:bg-orange-600 transition-colors"
