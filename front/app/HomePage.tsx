@@ -3,6 +3,7 @@ import Forms from '@/components/Forms';
 import Projects from '@/components/Projects';
 import Programs from '@/components/Programs';
 import HomePresentation from '@/components/HomePresentation';
+import AddButtonFix from '@/components/AddButtonFix';
 import { FaCode } from "react-icons/fa";
 import { MdDataObject } from "react-icons/md";
 import { CiMobile2 } from "react-icons/ci";
@@ -73,11 +74,12 @@ export default function HomePage() {
     console.log(typeof falseJson);
 
     return (
-        <>
+        <div className=''>
         <HomePresentation />
         <Programs listPrograms={listPrograms} />
         <Projects projects={falseJson} />
         <Forms />
-        </>
+        <AddButtonFix />
+        </div>
     );
 }

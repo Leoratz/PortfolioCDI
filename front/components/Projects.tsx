@@ -17,7 +17,7 @@ type ProjectsProps = {
 
 const Projects: React.FC<ProjectsProps> = ({projects}) => {
   return (
-    <div className =" bg-gray-100 py-6 flex flex-col gap-4">
+    <div className =" bg-gray-100 py-6 flex flex-col gap-4 px-18 ">
       {/* La div qui reprend le titre et le sous-titre */}
       <div className=" flex flex-col justify-center items-center gap-1 py-4">
           <p className=" font-semibold text-sm text-center uppercase"> Découvrez plus</p>
