@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 "use client";
  
 import { Project } from "@/types/project";
 import { useEffect, useState } from "react";
  
+=======
+
+import React from "react";
+import HomePage from "./HomePage"; 
+>>>>>>> 485bb513a90424841bbdc9b148bd216777c38b8e
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
  
@@ -23,6 +29,7 @@ export default function Home() {
  
   return (
     <>
+<<<<<<< HEAD
       <h1>Liste des projets</h1>
       {/* Affichage des projets */}
       {projects.length > 0 ? (
@@ -37,6 +44,10 @@ export default function Home() {
       ) : (
         <p>Aucun projet trouvé</p>
       )}
+=======
+      <h1>Liste des Projets</h1>
+      <HomePage />
+>>>>>>> 485bb513a90424841bbdc9b148bd216777c38b8e
     </>
   );
 }
