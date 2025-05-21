@@ -3,4 +3,6 @@ export type Student = {
     prenom: string;
     nom: string;
     github: string;
+    year: number;
+
 };

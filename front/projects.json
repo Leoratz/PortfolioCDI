@@ -1,0 +1,25 @@
+{
+    "projects": [
+        {
+        "title": "Project A",
+        "details": "Description of Project A",
+        "year": "1e année",
+        "technologies": ["React", "NodeJs"],
+        "url": "https://example.com/project-a"
+        },
+        {
+        "title": "Project B",
+        "details": "Description of Project B",
+        "year": "2e année",
+        "technologies": ["NextJs", "Lavarel"],
+        "url": "https://example.com/project-b"
+        },
+        {
+        "title": "Project C",
+        "details": "Description of Project C",
+        "year": "3e année",
+        "technologies": ["Python", "Django"],
+        "url": "https://example.com/project-a"
+        }
+    ]
+}
