@@ -8,4 +8,7 @@ export type Project = {
     student: Student;
     year: number;
     author: User;
+    image: string;
+    stack: string;
+    link: string;
 };
