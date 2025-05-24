@@ -27,21 +27,6 @@ export default function Home() {
     <>
       <h1>Liste des Projets</h1>
       <HomePage />
-
-      <h1>Liste des projets</h1>
-      {/* Affichage des projets */}
-      {projects.length > 0 ? (
-        <ul>
-          {projects.map((project) => (
-            <li key={project.id}>
-              <h2>{project.title}</h2>
-              <p>{project.details}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Aucun projet trouvé</p>
-      )}
     </>
   );
 }
