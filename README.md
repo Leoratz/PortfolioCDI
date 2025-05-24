@@ -5,6 +5,8 @@ Ce projet a été réalisé par :
 - Alyssia Lorsold Pradon
 - Brunic Feyou
 - Aurore Dimech
+
+
 et comprend le travail effectué pour la matière Framework Fullstack.
 
 ## Prérequis & Installation

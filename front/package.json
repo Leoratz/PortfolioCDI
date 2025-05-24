@@ -9,10 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0"
+=======
+    "jose": "^6.0.11",
+    "next": "15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+>>>>>>> origin/back
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

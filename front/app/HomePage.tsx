@@ -9,9 +9,6 @@ import { MdDataObject } from "react-icons/md";
 import { CiMobile2 } from "react-icons/ci";
 import { GrShieldSecurity } from "react-icons/gr";
 
-
-
-
 export default function HomePage() { 
     const falseJson = [
         {
@@ -71,7 +68,6 @@ export default function HomePage() {
             "icon": <CiMobile2 />,
         },
     ]
-    console.log(typeof falseJson);
 
     return (
         <div className=''>

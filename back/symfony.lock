@@ -49,7 +49,11 @@
             "ref": "e9481b233a11ef7e15fe055a2b21fd3ac1aa2bb7"
         },
         "files": [
+<<<<<<< HEAD
             "config/packages/lexik_jwt_authentication.yaml"
+=======
+            "./config/packages/lexik_jwt_authentication.yaml"
+>>>>>>> origin/back
         ]
     },
     "nelmio/cors-bundle": {
@@ -167,5 +171,14 @@
         "files": [
             "./config/packages/validator.yaml"
         ]
+    },
+    "vich/uploader-bundle": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "1b3064c2f6b255c2bc2f56461aaeb76b11e07e36"
+        }
     }
 }

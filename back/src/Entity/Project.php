@@ -11,8 +11,25 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Attribute\Groups;
 
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(
+            controller: 'App\Controller\ProjectController::create',
+            security: "is_granted('ROLE_USER')"
+        ),
+        new Patch(security: "is_granted('ROLE_USER')"),
+        new Delete(security: "is_granted('ROLE_USER')"),
+    ],
+
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
     forceEager: false
@@ -27,13 +44,13 @@ class Project
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message:  'The title cannot be blank.')]
     #[Assert\Length(min: 4, max: 255)]
     private ?string $title = null;
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message:  'The details cannot be blank.')]
     #[Assert\Length(min: 10, max : 5000)]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z0-9\s.,;:!?()\-]+$/',
@@ -54,7 +71,7 @@ class Project
 
     #[Groups(['read', 'write'])]
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message:  'The year cannot be blank.')]
     #[Assert\Range(
         min: 1,
         max: 5,
