@@ -1,9 +1,8 @@
 
 import Cards from "./Cards";
-
 import React from "react";
 
-// 1. Définir le type directement ici
+// 1. Définir le type 
 type Project = {
     title: string;
     details: string;
@@ -12,31 +11,30 @@ type Project = {
 };
 
 type ProjectsProps = {
-  project: Project[];
+  projects: Project[];
 };
 
-// 2. Utiliser le typage directement dans le composant
-const Projects: React.FC<ProjectsProps> = ({ project }) => {
+
+const Projects: React.FC<ProjectsProps> = ({projects}) => {
   return (
-    <div>
+    <div className =" bg-gray-100 py-6 flex flex-col gap-4 px-18 ">
       {/* La div qui reprend le titre et le sous-titre */}
       <div className=" flex flex-col justify-center items-center gap-1 py-4">
-          <p className=" font-semibold text-sm text-center"> Découvrez plus</p>
+          <p className=" font-semibold text-sm text-center uppercase"> Découvrez plus</p>
           <p className=" font-bold text-2xl text-center">Visitez nos différents projets </p>
-          <p className=" font-normal text-md text-center w-1/2">Nos étudiants travaillent sur des projets réels afin de mettre en avant leur compétences et leur créativité.</p>
+          <p className=" font-normal text-md text-center text-gray-600 w-1/2">Nos étudiants travaillent sur des projets réels afin de mettre en avant leur compétences et leur créativité.</p>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {project.map((proj, index) => (
+          {projects.map((project, index) => (
           <Cards
               key={index}
-              title={proj.title}
-              details={proj.details}
-              link={proj.link}
-              image={proj.image}
+              title={project.title}
+              details={project.details}
+              link={project.link}
+              image={project.image}
           />
           ))}
       </div>
-    
     </div>
   );
 };
