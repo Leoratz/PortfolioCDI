@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+// import { Project } from "@/types/project"; 
+
 
 export default function ProjectDetails() {
   const [project] = useState({
@@ -15,8 +17,8 @@ export default function ProjectDetails() {
     ),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     status: "En cours",
-    technologies: "React, Node.js, MongoDB",
-    liensite: "https://example.com",
+    stack: "React, Node.js, MongoDB",
+    link: "https://example.com",
     students: [
       {
         id: 1,
@@ -51,7 +53,7 @@ export default function ProjectDetails() {
               <p className="text-lg font-semibold text-black mb-2">
                 Technologies :
               </p>
-              <p className="mb-4 text-black">{project.technologies}</p>
+              <p className="mb-4 text-black">{project.stack}</p>
               <p className="text-lg font-semibold text-black mb-2">
                 Students :
               </p>
@@ -70,12 +72,12 @@ export default function ProjectDetails() {
                 Site du projet :
               </p>
               <a
-                href={project.liensite}
+                href={project.link}
                 className="text-blue-500 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {project.liensite}
+                {project.link}
               </a>
             </div>
           </div>

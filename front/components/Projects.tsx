@@ -4,6 +4,8 @@ import React from "react";
 
 import { Project } from "@/types/project"; 
 
+import Link from "next/link";
+
 type ProjectsProps = {
   projects: Project[];
 };
@@ -19,7 +21,16 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <Cards key={project.id} project={project} />
+          <Link href={`/project/${project.id}`} key={project.id} className="block bg-white rounded shadow p-4 hover:bg-orange-50 transition">
+            <Cards
+              title={project.title}
+              description={project.details}
+              image={project.image}
+              stack={project.stack}
+              students={project.student}
+              liensite={project.link}
+            />
+          </Link> 
         ))}
       </div>
     </div>

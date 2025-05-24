@@ -9,5 +9,5 @@ export type Project = {
     stack: string[];
     link: string;
     student: Student;
-    medias? : Media[];
+    image : Media[];
 };
