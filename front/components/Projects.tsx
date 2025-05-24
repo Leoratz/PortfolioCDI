@@ -2,6 +2,7 @@
 import Cards from "./Cards";
 
 import React from "react";
+import Link from "next/link";
 
 // 1. Définir le type directement ici
 type Project = {
