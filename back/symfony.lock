@@ -49,11 +49,7 @@
             "ref": "e9481b233a11ef7e15fe055a2b21fd3ac1aa2bb7"
         },
         "files": [
-<<<<<<< HEAD
             "config/packages/lexik_jwt_authentication.yaml"
-=======
-            "./config/packages/lexik_jwt_authentication.yaml"
->>>>>>> origin/back
         ]
     },
     "nelmio/cors-bundle": {
