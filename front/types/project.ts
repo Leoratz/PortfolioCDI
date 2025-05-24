@@ -1,11 +1,13 @@
-import { User } from "./user";
+import { Media } from "./media";
 import { Student } from "./student";
  
 export type Project = {
     id: number;
     title: string;
     details: string;
-    student: Student;
     year: number;
-    author: User;
+    stack: string[];
+    link: string;
+    student: Student;
+    medias? : Media[];
 };

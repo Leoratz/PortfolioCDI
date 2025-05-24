@@ -1,8 +1,6 @@
 export type Student = {
     id: number;
-    prenom: string;
-    nom: string;
+    firstName: string;
+    lastName: string;
     github: string;
-    year: number;
-
 };
