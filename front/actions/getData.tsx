@@ -41,20 +41,21 @@ export const getData = async () => {
     });
     const students = await studentsRes.json();
 
-    const mediasRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/ld+json",
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    const medias = await mediasRes.json();
+    // const mediasRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/media`, {
+    //     method: "GET",
+    //     headers: {
+    //         "Content-Type": "application/ld+json",
+    //         Authorization: `Bearer ${token}`,
+    //     },
+    // });
+    // console.log(mediasRes);
+    // const medias = await mediasRes.json();
 
     return {
         users: users,
         guests: guests,
         projects: projects,
         students: students,
-        medias: medias,
+        // medias: medias,
     };
 }

@@ -6,7 +6,11 @@ export async function middleware(request: NextRequest) {
     const token = request.cookies.get("token");
     const session = await getSession()
 
-    if(!session || !token) {
+    if (token && session && request.nextUrl.pathname === "/login") {
+        return NextResponse.redirect(new URL("/", request.url)); 
+    }
+
+    if((!session || !token ) && request.nextUrl.pathname.startsWith("/admin")) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
@@ -14,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin/:path*"], 
+    matcher: ["/admin/:path*", "/login"], 
 };

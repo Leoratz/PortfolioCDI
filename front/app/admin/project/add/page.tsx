@@ -5,10 +5,13 @@ import { getToken } from "@/utils/jwt";
 import { getData } from "@/actions/getData";
 import { User } from "@/types/user";
 import { Student } from "@/types/student";
+import { useRouter } from "next/navigation";
 
 import { Select, Switch, Input, Tag } from "antd";
 
 export default function AddProject() {
+  const router = useRouter();
+
   const [data, setData] = useState<{
     users: User;
     students: Student[];
@@ -20,6 +23,7 @@ export default function AddProject() {
   const [response, setResponse] = useState("");
   const [media, setMedia] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const [selectedYear, setSelectedYear] = useState<number | undefined>();
 
   const datas = async () => {
     const data = await getData();
@@ -84,10 +88,8 @@ export default function AddProject() {
     try {
       const token = await getToken();
       const formData = new FormData(e.target as HTMLFormElement);
-
       const title = formData.get("title") as string;
       const details = formData.get("details") as string;
-      const year = Number(formData.get("year"));
       const link = formData.get("link") as string;
       const images = media;
 
@@ -103,7 +105,7 @@ export default function AddProject() {
             title,
             details,
             students: selectedStudents,
-            year,
+            year: selectedYear,
             stack,
             link,
             medias: images,
@@ -115,6 +117,7 @@ export default function AddProject() {
       const data = await response.json();
       if (response.ok) {
         setResponse("Projet ajouté avec succès");
+        router.push(`/admin/project/${data.id}`);
       } else {
         console.error(data);
         setResponse(data.description || "Echec lors de la création du projet");
@@ -231,6 +234,7 @@ export default function AddProject() {
             name="year"
             className="border border-gray-300 rounded px-3 py-2 text-black bg-white focus:outline-orange-500"
             disabled={loading}
+            onChange={(e) => setSelectedYear(e.target.value)}
           >
             <option
               value={1}
