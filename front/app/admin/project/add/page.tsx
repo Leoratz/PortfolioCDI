@@ -23,7 +23,7 @@ export default function AddProject() {
   const [response, setResponse] = useState("");
   const [media, setMedia] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedYear, setSelectedYear] = useState<number | undefined>();
+  const [selectedYear, setSelectedYear] = useState<string | undefined>();
 
   const datas = async () => {
     const data = await getData();
@@ -65,7 +65,6 @@ export default function AddProject() {
         );
 
         const result = await upload.json();
-        console.log(result);
         if (upload.status === 201) {
           setMedia((prevMedia) => {
             if (prevMedia) {
@@ -105,7 +104,7 @@ export default function AddProject() {
             title,
             details,
             students: selectedStudents,
-            year: selectedYear,
+            year: Number(selectedYear),
             stack,
             link,
             medias: images,
