@@ -1,8 +1,9 @@
 import { getToken } from "@/utils/jwt";
 
 export const getData = async () => {  
-
+    
     const token = await getToken();
+
     const usersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
         method: "GET",
         headers: {
@@ -10,7 +11,7 @@ export const getData = async () => {
             Authorization: `Bearer ${token}`,
         },
     });
-    console.log(usersRes.status);
+
     const users = await usersRes.json();
     
     const guestsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/guests`, {
