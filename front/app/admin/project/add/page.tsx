@@ -155,7 +155,7 @@ export default function AddProject() {
                 type="text"
                 id="title"
                 name="title"
-                className="border border-gray-300 rounded px-3 py-1 text-black "
+                className="border border-gray-300 rounded px-3 py-1 text-black bg-white focus:outline-orange-500"
               />
             </div>
 
@@ -168,6 +168,7 @@ export default function AddProject() {
               </label>
               <Switch
                 id="visibility"
+                style={visbility ? { backgroundColor: "var(--color-orange-500)" } : {}}
                 className="w-fit"
                 defaultValue={visbility}
                 onChange={(value) => setVisibility(value)}
@@ -185,7 +186,7 @@ export default function AddProject() {
           <textarea
             id="details"
             name="details"
-            className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-none "
+            className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-orange-500 bg-white"
           ></textarea>
         </div>
 
@@ -200,7 +201,10 @@ export default function AddProject() {
             id="students"
             mode="multiple"
             allowClear
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+            }}
+            className="custom-select"
             placeholder="Sélectionner les étudiants"
             options={data?.students?.map((student) => ({
               label: `${student.firstName} ${student.lastName}`,
@@ -211,7 +215,7 @@ export default function AddProject() {
                 .toLowerCase()
                 .includes(input.toLowerCase())
             }
-            onChange={(value) => setSelectedStudents(value)} // Update state on change
+            onChange={(value) => setSelectedStudents(value)}
           />
         </div>
 
@@ -225,7 +229,7 @@ export default function AddProject() {
           <select
             id="year"
             name="year"
-            className="border border-gray-300 rounded px-3 py-2 text-black"
+            className="border border-gray-300 rounded px-3 py-2 text-black bg-white focus:outline-orange-500"
           >
             <option
               value={1}
@@ -306,7 +310,7 @@ export default function AddProject() {
             type="text"
             id="link"
             name="link"
-            className="border border-gray-300 rounded px-3 py-1 text-black "
+            className="border border-gray-300 rounded px-3 py-1 text-black bg-white focus:outline-orange-500"
           />
         </div>
 
@@ -323,7 +327,7 @@ export default function AddProject() {
             multiple
             id="images"
             name="images"
-            className="border border-gray-300 rounded px-3 py-1 text-black "
+            className="border border-gray-300 rounded px-3 py-1 text-black bg-white focus:outline-orange-500"
           />
         </div>
 
