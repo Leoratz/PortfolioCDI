@@ -3,7 +3,7 @@
 import { Project } from "@/types/project";
 import { useEffect, useState } from "react";
 import React from "react";
-import HomePage from "./HomePage"; 
+import HomePage from "../components/HomePage"; 
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -13,7 +13,7 @@ export default function Home() {
     try{
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`);
       const data = await res.json();
-      setProjects(data.member as Project[]);
+      setProjects(data as Project[]);
     } catch (error) {
       console.error(error);
     }
@@ -25,8 +25,7 @@ export default function Home() {
  
   return (
     <>
-      <h1>Liste des Projets</h1>
-      <HomePage />
+      <HomePage projects={projects} />
     </>
   );
 }
