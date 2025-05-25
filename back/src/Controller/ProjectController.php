@@ -18,7 +18,6 @@ class ProjectController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em)
     {
          $data = json_decode($request->getContent(), true);
-        // dd($data);
 
         $title = $data['title'] ?? null;
         $details = $data['details'] ?? null;
@@ -26,8 +25,9 @@ class ProjectController extends AbstractController
         $year = $data['year'] ?? null;
         $stack = $data['stack'] ?? [];
         $link = $data['link'] ?? null;
+        $visibility = $data['visibility'] ?? true;
 
-        if(!$title || !$details || !empty($students) || !$year || !$stack) {
+        if(!$title || !$details || empty($students) || !$year || !$stack) {
             return $this->json(['error' => 'Missing required fields : '. json_encode($data)], Response::HTTP_BAD_REQUEST);
         }
 
@@ -39,6 +39,7 @@ class ProjectController extends AbstractController
             $project->setYear($year);
             $project->setStack($stack);
             $project->setLink($link);
+            $project->setVisibility($visibility);
 
             foreach ($students as $studentId) {
                 $student = $em->getRepository(Student::class)->find($studentId);
@@ -65,6 +66,7 @@ class ProjectController extends AbstractController
         } catch (\Exception $e) {
             $em->getConnection()->rollBack();
             return $this->json(['error' => 'Failed to create project'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            // return $this->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -99,6 +99,10 @@ class Project
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'project')]
     private Collection $medias;
 
+    #[ORM\Column]
+    #[Groups(['read', 'write'])]
+    private ?bool $visibility = null;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -220,6 +224,18 @@ class Project
                 $medium->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVisibility(): ?bool
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(bool $visibility): static
+    {
+        $this->visibility = $visibility;
 
         return $this;
     }

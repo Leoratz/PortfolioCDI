@@ -23,7 +23,7 @@ Pour mettre en place ce projet, veuillez suivre les étapes suivantes :
     - `php bin/console make:migration`
     - `php bin/console doctrine:migrations:migrate`
     - `php bin/console lexik:jwt:generate-keypair`
-    - `symfony serve`
+    - `symfony server:start --no-tls`
 3. Dans le dossier du projet, faire :
     - copier le .env.example et le renommer en .env
     - remplir les informations du .env - mettre dans la clef `JWT_SECRET` le contenu du fichier `back/config/jwt/privare.perm`
