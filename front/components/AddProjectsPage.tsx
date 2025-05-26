@@ -116,7 +116,7 @@ export default function AddProjectsPage({ onClose, project }: ProjectFormPopupPr
 
             <button
             type="submit"
-            className="mt-6 items-center w-fit bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4rounded focus:outline-none focus:shadow-outline"
+            className="mt-6 items-center w-fit bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
                {isEdit ? "Enregistrer les modifications" : "Ajouter le projet"}
             </button>
