@@ -22,12 +22,7 @@ export default function AddProjectsPage({ onClose }: PopupProps) {
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-      onClick={handleClickOutside}
-      className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur bg-opacity-50 z-50" >
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={handleClickOutside} className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur bg-opacity-50 z-50" >
       <div ref={modalRef} className="absolute w-1/2 bg-white p-10 rounded-lg flex flex-col gap-8">
         <button className="w-full flex justify-end text-gray-500 hover:text-gray-700 focus:outline-none" onClick={onClose} aria-label="Fermer la fenêtre">
           <RxCross2 className="h-6 w-6" />
