@@ -7,18 +7,24 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 
 type CardProps = {
-  project: Project;
+    project: Project;
+    onEdit: (project: Project) => void;
+    onDelete: () => void;
 };
 
-export default function Cards({ project }: CardProps) {
+export default function Cards({ project, onEdit, onDelete }: CardProps) {
 //   console.log("Image full URL:", `http://localhost:8000/uploads/${project.medias?.[0]?.filePath}`);
   return (
         <div className="flex flex-col justify-center gap-2 bg-white shadow-md rounded-lg p-4 m-2 h-auto hover:scale-105 transition-transform duration-300">
             <div className="absolute w-1/2 bg-white p-10 rounded-lg flex flex-col gap-8">
-                <button className="w-full flex justify-end text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Modifier le projet">
+                <button 
+                onClick={() => onEdit(project)}
+                className="w-full flex justify-end text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Modifier le projet">
                     <AiFillEdit className="h-6 w-6" />
                 </button>
-                <button className="w-full flex justify-end text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Éditer le projet">
+                <button  
+                onClick={onDelete}
+                className="w-full flex justify-end text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="supprimer le projet">
                     <FaRegTrashAlt className="h-6 w-6" />
                 </button>
              </div>

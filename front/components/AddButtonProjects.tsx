@@ -1,9 +1,6 @@
-
-
 type AddButtonFixProps = {
   onClick: () => void;
 };
-
 
 export default function AddButtonFix({onClick}:  AddButtonFixProps) {
     return (

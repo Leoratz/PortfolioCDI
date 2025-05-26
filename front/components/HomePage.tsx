@@ -19,7 +19,7 @@ type HomePageProps = {
 }
 
 export default function HomePage({ projects }: HomePageProps) { 
-     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const listPrograms = [
         {
             "title": "Fullstack web developpement",
@@ -43,15 +43,39 @@ export default function HomePage({ projects }: HomePageProps) {
         },
     ]
 
+    const [editedProject, setEditedProject] = useState<Project | null >(null); 
+    const handleEdit = (project: Project) => {
+        setEditedProject(project);
+        setIsPopupOpen(true);
+    };
+
+
+    const handleDelete = async (projectId: number) => {
+    const confirmDelete = confirm("Es-tu sûr de vouloir supprimer ce projet ?");
+        if (!confirmDelete) return;
+
+        
+    };
+
     return (
         <div className='relative'>
             <HomePresentation />
             <Programs listPrograms={listPrograms} />
-            <Projects projects={projects} />
+            <Projects 
+            projects={projects} 
+            onEdit={handleEdit} 
+            onDelete={handleDelete}
+            />
             <Forms />
             <AddButtonFix onClick={() => setIsPopupOpen(true)} />
             { isPopupOpen && (
-                <AddProjectsPage onClose={() => setIsPopupOpen(false) } />
+                <AddProjectsPage 
+                onClose ={() => 
+                {setIsPopupOpen(false); 
+                setEditedProject(null);
+                }}
+                project={editedProject}
+                />
             )}
         </div>
     );
