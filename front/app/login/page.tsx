@@ -30,10 +30,9 @@ export default function Login() {
 
     const data = await register.json();
     if (register.ok) {
-      // Récupération du token
       const token = data.token;
-      createCookie(token); // Crée le cookie avec le token
-      redirect("/"); // Redirige vers la page d'accueil
+      createCookie(token);
+      redirect("/");
     } else {
       console.error(data);
       if (data.message) {
