@@ -8,10 +8,11 @@ type ProjectsProps = {
   projects: Project[];
   onEdit: (project: Project) => void;
   onDelete: (projectId: number) => void; 
+  isConnected: boolean
 };
 
 
-const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete }) => {
+const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnected }) => {
   return (
     <div className =" bg-gray-100 py-6 flex flex-col gap-4 lg:px-18 md:px-10 px-4">
       <div className=" flex flex-col justify-center items-center gap-1 py-4">
@@ -21,7 +22,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete }) => {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <Cards key={project.id} project={project} onEdit = {onEdit} onDelete={() => onDelete(project.id)} />
+          <Cards key={project.id} project={project} onEdit={onEdit} onDelete={() => onDelete(project.id)} isConnected={isConnected} />
         ))}
       </div>
     </div>

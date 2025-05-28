@@ -44,15 +44,15 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center w-full min-h-full">
       <div
-        className="absolute bg-cover bg-center opacity-80"
+        className="bg-gray-100/80 p-8 rounded-2xl"
         aria-labelledby="login-title"
       >
         <h1
           id="login-title"
           tabIndex={0}
-          className="text-black font-extrabold flex justify-center m-8 text-3xl"
+          className="text-black font-extrabold flex justify-center mb-8 text-3xl"
         >
           Admin Login
         </h1>

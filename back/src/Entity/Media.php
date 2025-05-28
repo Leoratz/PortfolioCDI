@@ -79,6 +79,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     #[Groups(['read', 'write'])]
     #[ORM\ManyToOne(inversedBy: 'media')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Project $project = null;
 
     public function getId(): ?int

@@ -96,7 +96,7 @@ class Project
      * @var Collection<int, Media>
      */
     #[Groups(['read', 'write'])]
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'project')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'project', cascade: ['remove'])]
     private Collection $medias;
 
     #[ORM\Column]

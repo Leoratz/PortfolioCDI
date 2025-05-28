@@ -130,7 +130,7 @@ export default function AddProject() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-black font-extrabold flex justify-center m-8 text-3xl">
         Ajout d&apos;un projet
       </h1>

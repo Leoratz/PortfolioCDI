@@ -38,7 +38,7 @@ export default function ContactMessagesList() {
   };
 
   return (
-    <main className="p-6 bg-gray-100 min-h-screen">
+    <main className="p-6 bg-gray-100">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold text-orange-500">Messages de contact</h1>
         <p className="text-gray-600">Liste des personnes ayant tenté de nous contacter</p>
