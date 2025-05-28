@@ -5,7 +5,8 @@ import Programs from '@/components/Programs';
 import HomePresentation from '@/components/HomePresentation';
 import AddButtonFix from '@/components/AddButtonProjects';
 import AddProjectsPage from '@/components/AddProjectsPage';
-import { useState } from 'react';
+
+import { useEffect, useState } from "react";
 
 import { Project } from '@/types/project';
 
@@ -14,12 +15,9 @@ import { MdDataObject } from "react-icons/md";
 import { CiMobile2 } from "react-icons/ci";
 import { GrShieldSecurity } from "react-icons/gr";
 
-type HomePageProps = {
-    projects: Project[];
-}
-
-export default function HomePage({ projects }: HomePageProps) { 
+export default function HomePage() { 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [projects, setProjects] = useState<Project[]>([]);
     const listPrograms = [
         {
             "title": "Fullstack web developpement",
@@ -43,6 +41,20 @@ export default function HomePage({ projects }: HomePageProps) {
         },
     ]
 
+    const getProjects = async () => {
+        try{
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`);
+          const data = await res.json();
+          setProjects(data as Project[]);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+     
+      useEffect(() => {
+        getProjects();
+      }, []);
+
     const [editedProject, setEditedProject] = useState<Project | null >(null); 
     const handleEdit = (project: Project) => {
         setEditedProject(project);
@@ -53,8 +65,7 @@ export default function HomePage({ projects }: HomePageProps) {
     const handleDelete = async (projectId: number) => {
     const confirmDelete = confirm("Es-tu sûr de vouloir supprimer ce projet ?");
         if (!confirmDelete) return;
-
-        
+        //TODO: delete project en back
     };
 
     return (
