@@ -45,26 +45,46 @@ export default function AddCategoryYear() {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="absolute bg-cover bg-center opacity-80">
-          <h1 className="text-black font-extrabold flex justify-center m-8 text-2xl">
+        <div
+          className="absolute bg-cover bg-center opacity-80"
+          aria-labelledby="add-category-title"
+        >
+          <h1
+            className="text-black font-extrabold flex justify-center m-8 text-2xl"
+            id="add-category-title"
+            tabIndex={0}
+          >
             Ajout d&apos;une catégorie
           </h1>
-          {response && <p>{response}</p>}
+          {response && (
+            <p role="alert" aria-live="assertive">
+              {response}
+            </p>
+          )}
           <form
             method="POST"
             onSubmit={handleSubmit}
             className="flex flex-col gap-3"
+            aria-label="Formulaire d'ajout d'une catégorie année"
+            aria-describedby="add-year-desc"
           >
-            <label htmlFor="name" className="text-black">Année</label>
+            <label htmlFor="name" className="text-black">
+              Année
+            </label>
             <input
               type="text"
               id="name"
               name="name"
               className="border border-gray-300 rounded px-3 py-2  text-blac focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+              aria-required="true"
+              aria-label="Nom de l'année"
+              autoComplete="off"
             />
             <button
               type="submit"
               className="bg-orange-500 rounded px-4 py-2 hover:bg-orange-600 transition-colors"
+              aria-label="Ajouter la catégorie année"
             >
               Ajouter
             </button>

@@ -42,15 +42,28 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="absolute bg-cover bg-center opacity-80">
-        <h1 className="text-black font-extrabold flex justify-center m-8 text-3xl">
+      <div
+        className="absolute bg-cover bg-center opacity-80"
+        aria-labelledby="login-title"
+      >
+        <h1
+          id="login-title"
+          tabIndex={0}
+          className="text-black font-extrabold flex justify-center m-8 text-3xl"
+        >
           Admin Login
         </h1>
-        {response && <p>{response}</p>}
+        {response && (
+          <p role="alert" aria-live="assertive">
+            {response}
+          </p>
+        )}
         <form
           method="POST"
           onSubmit={handleSubmit}
           className="flex flex-col gap-3"
+          aria-describedby="login-desc"
+          aria-label="Formulaire de connexion administrateur"
         >
           <label htmlFor="email" className="font-semibold mb-1 text-black">
             Email
@@ -61,6 +74,9 @@ export default function Login() {
             name="email"
             placeholder="Email"
             className="border border-gray-300 rounded px-3 py-2  text-blac focus:outline-none focus:ring-2 focus:ring-orange-400"
+            required
+            aria-required="true"
+            autoComplete="username"
           />
           <label htmlFor="password" className="font-semibold mb-1 text-black">
             Mot de passe
@@ -70,10 +86,14 @@ export default function Login() {
             name="password"
             placeholder="Mot de passe"
             className="border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange-400"
+            required
+            aria-required="true"
+            autoComplete="current-password"
           />
           <button
             type="submit"
             className="bg-orange-500 rounded px-4 py-2 hover:bg-orange-600 transition-colors"
+            aria-label="Se connecter"
           >
             Connexion
           </button>

@@ -26,12 +26,24 @@ export default function AddProject() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div>
-        <h1 className="text-black font-extrabold flex justify-center m-8 text-3xl">
+      <div aria-labelledby="add-project-title">
+        <h1
+          className="text-black font-extrabold flex justify-center m-8 text-3xl"
+          id="add-project-title"
+          tabIndex={0}
+        >
           Ajout d&apos;un article
         </h1>
         {projects.length > 0 && (
-          <form method="POST" className="flex flex-col gap-3">
+          <form
+            method="POST"
+            className="flex flex-col gap-3"
+            aria-label="Formulaire d'ajout d'article"
+            aria-describedby="add-article-desc"
+          >
+            <p id="add-article-desc" className="sr-only">
+              Remplissez ce formulaire pour ajouter un nouvel article.
+            </p>
             <label htmlFor="title" className="text-black">
               Titre
             </label>
@@ -39,7 +51,11 @@ export default function AddProject() {
               type="text"
               id="title"
               name="title"
-              className="border border-gray-300 rounded px-3 py-1 text-black "
+              className="border border-gray-300 rounded px-3 py-1 text-black"
+              required
+              aria-required="true"
+              aria-label="Titre de l'article"
+              autoComplete="off"
             />
             <br />
             <label htmlFor="content" className="text-black">
@@ -49,6 +65,9 @@ export default function AddProject() {
               id="content"
               name="content"
               className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-none "
+              required
+              aria-required="true"
+              aria-label="Contenu de l'article"
             ></textarea>
             <br />
             <label htmlFor="student" className="text-black">
@@ -58,9 +77,16 @@ export default function AddProject() {
               id="projectName"
               name="projectName"
               className="border border-gray-300 rounded px-3 py-2 text-black"
+              required
+              aria-required="true"
+              aria-label="Nom du projet"
             >
               {projects.map((project: any) => (
-                <option value={project["@id"]} key={project.id} className="text-black">
+                <option
+                  value={project["@id"]}
+                  key={project.id}
+                  className="text-black"
+                >
                   {project.name}
                 </option>
               ))}
@@ -74,11 +100,17 @@ export default function AddProject() {
               id="student"
               name="student"
               className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+              aria-required="true"
+              aria-label="Nom de l'étudiant"
+              autoComplete="off"
             />
             <br />
             <button
               type="submit"
               className="bg-orange-500 rounded px-4 py-1 hover:bg-orange-600 transition-colors"
+              aria-label="Ajouter l'article"
+              aria-describedby="add-article-desc"
             >
               Ajouter
             </button>

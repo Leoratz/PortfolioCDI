@@ -51,6 +51,12 @@ export default function Register() {
           method="POST"
           onSubmit={handleSubmit}
           className="flex flex-col gap-3"
+          aria-label="Formulaire d'inscription"
+          aria-describedby="register-desc"
+          aria-labelledby="register-title"
+          id="register-form"
+          tabIndex={0}
+          role="form"
         >
           <label htmlFor="email" className="font-semibold mb-1 text-black">
             Email
@@ -60,10 +66,21 @@ export default function Register() {
             name="email"
             placeholder="Email"
             className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            aria-label="Email"
+            aria-describedby="email-desc"
+            id="email"
+            tabIndex={0}
+            autoComplete="email"
+            required
+
           />
           <label
             htmlFor="plainPassword"
             className="font-semibold mb-1 text-black"
+            id="password-label"
+            aria-label="Mot de passe"
+            aria-describedby="password-desc"
+            tabIndex={0}
           >
             Mot de passe
           </label>
@@ -72,10 +89,19 @@ export default function Register() {
             name="plainPassword"
             placeholder="Mot de passe"
             className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            aria-label="Mot de passe"
+            aria-describedby="password-desc"
+            id="plainPassword"
+            tabIndex={0}
+            autoComplete="new-password"
           />
           <button
             type="submit"
             className="bg-orange-500 rounded px-4 py-2 hover:bg-orange-600 transition-colors"
+            aria-label="Inscription"
+            aria-describedby="register-desc"
+            id="register-button"
+            tabIndex={0}
           >
             Inscription
           </button>
