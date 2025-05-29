@@ -46,16 +46,16 @@ export default function Cards({
                 onClick={() => onEdit(project)}
                 aria-label="Modifier le projet"
               >
-                <div className="bg-gray-700 border border-gray-700 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
-                  <AiFillEdit className="h-6 w-6 text-white hover:text-gray-700 focus:text-gray-700 transition-colors duration-200" />
+                <div className="group bg-gray-700 border border-gray-700 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
+                  <AiFillEdit className="h-6 w-6 text-white group-hover:text-gray-700 group-focus:text-gray-700 transition-colors duration-200" />
                 </div>
               </button>
               <button
                 onClick={onDelete}
                 aria-label="supprimer le projet"
               >
-                <div className="bg-red-600 border border-red-600 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
-                  <FaRegTrashAlt className="h-6 w-6 text-white hover:text-red-600 focus:text-red-600 transition-colors duration-200" />
+                <div className="group bg-red-600 border border-red-600 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
+                  <FaRegTrashAlt className="h-6 w-6 text-white group-hover:text-red-600 group-focus:text-red-600 transition-colors duration-200" />
                 </div>
               </button>
             </div>

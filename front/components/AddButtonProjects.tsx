@@ -4,7 +4,7 @@ export default function AddButtonFix() {
   return (
     <>
       <Link
-        href="/project/add"
+        href="/admin/project/add"
         className="bg-orange-500 text-white p-2 rounded-full fixed bottom-8 right-8 shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-300"
       >
         <svg

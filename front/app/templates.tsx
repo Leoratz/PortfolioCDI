@@ -7,7 +7,7 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
             <header>
                <Menu />
             </header>
-            <main>
+            <main className="grow">
                 {children}
             </main>
             <footer>
