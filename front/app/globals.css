@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.custom-select.ant-select-focused .ant-select-selector, :where(.css-dev-only-do-not-override-vrrzze).ant-input-outlined:hover, :where(.css-dev-only-do-not-override-vrrzze).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector, :where(.css-dev-only-do-not-override-vrrzze).ant-input-outlined:focus, :where(.css-dev-only-do-not-override-vrrzze).ant-input-outlined:focus-within {
+  border-color: var(--color-orange-500) !important;
+}

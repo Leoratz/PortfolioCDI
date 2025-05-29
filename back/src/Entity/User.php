@@ -2,22 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Attribute\Groups;
-
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
-use App\State\UserPasswordHasherProcessor;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use App\State\UpdateUserProcessor;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use App\State\UserPasswordHasherProcessor;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -25,11 +26,11 @@ use ApiPlatform\Metadata\ApiResource;
 #[UniqueEntity('email', message: 'Cette adresse email est déjà utilisée.')]
 #[ApiResource(
     operations: [
-        new GetCollection(security: "is_granted('ROLE_ADMIN')"),
-        new Post(processor: UserPasswordHasherProcessor::class, security: "is_granted('ROLE_ADMIN')"),
-        new Get(security: "is_granted('ROLE_ADMIN')"),
-        new Patch(processor: UserPasswordHasherProcessor::class, security: "is_granted('ROLE_ADMIN')"),
-        new Delete(security: "is_granted('ROLE_ADMIN')"),
+        new GetCollection(security: "is_granted('ROLE_ADMIN')", securityMessage: 'You are not allowed to get users'),
+        new Post(security: "is_granted('ROLE_ADMIN')", securityMessage: 'You are not allowed to add users', processor: UserPasswordHasherProcessor::class),
+        new Get(security: "is_granted('ROLE_ADMIN') or object == user", securityMessage: 'You are not allowed to get this user'),
+        new Patch(security: "is_granted('ROLE_ADMIN') or object == user", securityMessage: 'You are not allowed to update this user', processor: UpdateUserProcessor::class),
+        new Delete(security: "is_granted('ROLE_ADMIN')", securityMessage: 'You are not allowed to delete this user'),
     ],
 
     normalizationContext: ['groups' => ['read']],
