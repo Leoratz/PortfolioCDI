@@ -236,6 +236,14 @@ export default function AddProject() {
             onChange={(e) => setSelectedYear(e.target.value)}
           >
             <option
+              value=""
+              className="text-black"
+              disabled
+              selected
+            >
+              Sélectionner une année
+            </option>
+            <option
               value={1}
               className="text-black"
             >

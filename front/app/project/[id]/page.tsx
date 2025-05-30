@@ -84,7 +84,7 @@ export default function ProjectDetails() {
                 className="text-lg font-semibold text-black  mb-1"
                 id="students-label"
               >
-                Students :
+                Étudiants :
               </p>
               <div
                 className="flex flex-col gap-2 text-black"

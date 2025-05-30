@@ -61,6 +61,7 @@ export default function HomePage() {
         `${process.env.NEXT_PUBLIC_API_URL}/api/projects`
       );
       const data = await res.json();
+      console.log("Projects data:", data);
       setProjects(data as Project[]);
     } catch (error) {
       console.error(error);
