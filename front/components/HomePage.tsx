@@ -97,12 +97,10 @@ export default function HomePage() {
         }
       );
 
-      await response.json();
-
       if (response.ok) {
         setResponse("Projet supprimé avec succès");
         setProjects((prevProjects) =>
-          prevProjects.filter((project) => project.id !== projectId)
+          prevProjects.filter((project) => Number(project.id) !== Number(projectId))
         );
       }
     } catch (e) {
