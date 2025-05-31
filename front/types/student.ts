@@ -1,6 +1,6 @@
 export type Student = {
     id: number;
-    firstName: string;
     lastName: string;
+    firstName: string;
     github: string;
 };

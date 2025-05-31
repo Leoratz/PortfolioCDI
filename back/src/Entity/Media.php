@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new GetCollection(),
         new Get(),
         new Post(
-            security: "is_granted('ROLE_ADMIN')",
+            security: "is_granted('ROLE_USER')",
             controller: CreateMediaObjectAction::class,
             deserialize: false,
             validationContext: ['groups' => ['Default', 'write']],
@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 )
             )
         ),
-        new Delete(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_USER')"),
     ],
     
     normalizationContext: ['groups' => ['read']],
@@ -79,6 +79,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     #[Groups(['read', 'write'])]
     #[ORM\ManyToOne(inversedBy: 'media')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Project $project = null;
 
     public function getId(): ?int

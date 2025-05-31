@@ -8,6 +8,7 @@ export type Project = {
     year: number;
     stack: string[];
     link: string;
-    student: Student;
-    image : Media[];
+    visibility: boolean;
+    students: Student[];
+    medias? : Media[];
 };
