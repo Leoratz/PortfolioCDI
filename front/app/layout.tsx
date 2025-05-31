@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
+
+import { AuthProvider } from "@/context/AuthContext";
  
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -16,13 +18,15 @@ export default function RootLayout({
   return (
     <html>
       <body className="min-h-screen flex flex-col">
-        <header>
-          <Menu />
-        </header>
-        <main className="grow flex"> 
-         {children}
-        </main>
-       <Footer />
+        <AuthProvider>
+          <header>
+            <Menu />
+          </header>
+          <main className="grow flex"> 
+          {children}
+          </main>
+        <Footer />
+       </AuthProvider>
       </body>
     </html>
   );

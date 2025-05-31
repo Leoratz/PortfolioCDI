@@ -18,7 +18,7 @@ export default function AddProject() {
   } | null>(null);
   const [stack, setStack] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [visbility, setVisibility] = useState(true);
+  const [visibility, setVisibility] = useState(true);
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [response, setResponse] = useState("");
   const [media, setMedia] = useState<string[]>([]);
@@ -108,7 +108,7 @@ export default function AddProject() {
             stack,
             link,
             medias: images,
-            visibility: visbility,
+            visibility: visibility,
           }),
         }
       );
@@ -166,10 +166,10 @@ export default function AddProject() {
             <Switch
               id="visibility"
               style={
-                visbility ? { backgroundColor: "var(--color-orange-500)" } : {}
+                visibility ? { backgroundColor: "var(--color-orange-500)" } : {}
               }
               className="w-fit"
-              defaultValue={visbility}
+              defaultValue={visibility}
               onChange={(value) => setVisibility(value)}
               disabled={loading}
             />

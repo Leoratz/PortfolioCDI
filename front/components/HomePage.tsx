@@ -5,7 +5,7 @@ import Programs from "@/components/Programs";
 import HomePresentation from "@/components/HomePresentation";
 import AddButtonFix from "./AddButtonProjects";
 import { getToken } from "@/utils/jwt";
-import { getSession } from "@/utils/jwt";
+import { useAuth } from "@/context/AuthContext";
 
 import { useEffect, useState } from "react";
 
@@ -17,10 +17,12 @@ import { CiMobile2 } from "react-icons/ci";
 import { GrShieldSecurity } from "react-icons/gr";
 
 export default function HomePage() {
+  const { isLogged } = useAuth();
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [response, setResponse] = useState("");
-  const [isLogged, setIsLogged] = useState(false);
+
   const listPrograms = [
     {
       title: "Fullstack web developpement",
@@ -43,17 +45,6 @@ export default function HomePage() {
       icon: <CiMobile2 />,
     },
   ];
-
-  const fetchSession = async () => {
-    const session = await getSession();
-    if (session) {
-      setIsLogged(true);
-    }
-  };
-
-  useEffect(() => {
-    fetchSession();
-  }, []);
 
   const getProjects = async () => {
     try {

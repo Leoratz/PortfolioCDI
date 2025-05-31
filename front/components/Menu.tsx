@@ -1,22 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { getSession } from "@/utils/jwt";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Menu() {
-  const [isLogged, setIsLogged] = useState(false);
-
-  const fetchSession = async () => {
-    const session = await getSession();
-    if (session) {
-      setIsLogged(true);
-    }
-  };
-
-  useEffect(() => {
-    fetchSession();
-  }, []);
+  const { isLogged, logoutUser } = useAuth();
+  
+  const handleLogout = async () => {
+    await logoutUser();
+  }
 
   return (
     <nav
@@ -78,15 +70,15 @@ export default function Menu() {
               </Link>
             </li>
             <li role="none">
-              <Link
-                href="#"
+              <button
+                onClick={handleLogout}
                 className="text-white bg-orange-500 py-2 px-4 rounded-3xl font-semibold hover:bg-orange-600 transition-colors"
                 role="menuitem"
                 tabIndex={0}
                 aria-label="Déconnexion"
               >
                 Déconnexion
-              </Link>
+              </button>
             </li>
           </>
         )}

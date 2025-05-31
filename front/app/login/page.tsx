@@ -4,9 +4,11 @@ import { useState } from "react";
 
 import { createCookie } from "@/utils/jwt";
 import { redirect } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const [response, setResponse] = useState<string>("");
+  const { setIsLogged } = useAuth();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,6 +34,7 @@ export default function Login() {
     if (register.ok) {
       const token = data.token;
       createCookie(token);
+      setIsLogged(true);
       redirect("/");
     } else {
       console.error(data);
