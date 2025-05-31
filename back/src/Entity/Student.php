@@ -18,12 +18,19 @@ use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 #[ApiResource(
+    // operations: [
+    //     new GetCollection(security: "is_granted('ROLE_USER')"),
+    //     new Get(security: "is_granted('ROLE_USER')"),
+    //     new Post(security: "is_granted('ROLE_USER')"),
+    //     new Patch(security: "is_granted('ROLE_USER')"),
+    //     new Delete(security: "is_granted('ROLE_USER')"),
+    // ],
     operations: [
-        new GetCollection(security: "is_granted('ROLE_USER')"),
-        new Get(security: "is_granted('ROLE_USER')"),
-        new Post(security: "is_granted('ROLE_USER')"),
-        new Patch(security: "is_granted('ROLE_USER')"),
-        new Delete(security: "is_granted('ROLE_USER')"),
+        new GetCollection(),
+        new Get(),
+        new Post(),
+        new Patch(),
+        new Delete()
     ],
 
     normalizationContext: ['groups' => ['read']],

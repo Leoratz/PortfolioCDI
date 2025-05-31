@@ -36,12 +36,12 @@ export default function ProjectDetails() {
       tabIndex={0}
     >
       <div
-        className="bg-white p-7 rounded shadow-md w-full max-w-4xl my-8"
+        className="bg-white p-4 sm:p-7 rounded shadow-md w-full max-w-4xl my-8"
         aria-label="Détails du projet"
         aria-describedby="project-details-desc"
       >
         <h1
-          className="text-2xl font-bold mb-5 text-center text-black"
+          className="sm:text-2xl text-xl font-bold mb-5 text-center text-black"
           id="project-details-title"
           tabIndex={0}
         >
@@ -139,18 +139,19 @@ export default function ProjectDetails() {
               >
                 Galerie :
               </p>
-
-              {project?.medias?.map((medium) => (
-                <div key={medium.id}>
-                  <Image
-                    src={`http://localhost:8000/${medium?.contentUrl}`}
-                    alt={project.title}
-                    className="block object-cover w-full rounded-lg"
-                    width={500}
-                    height={500}
-                  />
-                </div>
-              ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {project?.medias?.map((medium) => (
+                  <div key={medium.id}>
+                    <Image
+                      src={`http://localhost:8000/${medium?.contentUrl}`}
+                      alt={project.title}
+                      className="block object-cover w-full rounded-lg"
+                      width={500}
+                      height={500}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -2,21 +2,53 @@
 
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
 
 export default function Menu() {
   const { isLogged, logoutUser } = useAuth();
-  
+  const [open, setOpen] = useState(false);
+
   const handleLogout = async () => {
     await logoutUser();
-  }
+  };
 
   return (
-    <nav
-      className="bg-white shadow-md py-4"
-      aria-label="Menu principal"
-    >
+    <nav className="bg-white shadow-md py-4" aria-label="Menu principal">
+      {/* Hamburger for mobile */}
+      <div className="flex justify-between items-center px-4 sm:px-8 md:px-16 lg:px-32">
+        <button
+          className="sm:hidden flex flex-col justify-center items-center"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={open}
+          aria-controls="main-menu"
+          onClick={() => setOpen(!open)}
+        >
+          <span
+            className={`block w-6 h-0.5 bg-black mb-1 transition-all ${
+              open ? "rotate-45 translate-y-2" : ""
+            }`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-black mb-1 transition-all ${
+              open ? "opacity-0" : ""
+            }`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-black transition-all ${
+              open ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          ></span>
+        </button>
+      </div>
+      {/* Menu ordi */}
       <ul
-        className="flex justify-center gap-8 items-center"
+        id="main-menu"
+        className={`
+          flex-col sm:flex-row flex justify-center gap-8 items-center
+          ${open ? "flex" : "hidden"} sm:flex
+          bg-white sm:bg-transparent w-full sm:w-auto py-4 sm:py-0
+          transition-all
+        `}
         role="menubar"
       >
         <li role="none">
@@ -26,6 +58,7 @@ export default function Menu() {
             role="menuitem"
             tabIndex={0}
             aria-label="Accueil"
+            onClick={() => setOpen(false)}
           >
             Accueil
           </Link>
@@ -39,6 +72,7 @@ export default function Menu() {
               role="menuitem"
               tabIndex={0}
               aria-label="Connexion"
+              onClick={() => setOpen(false)}
             >
               Connexion
             </Link>
@@ -54,6 +88,7 @@ export default function Menu() {
                 role="menuitem"
                 tabIndex={0}
                 aria-label="Utilisateurs"
+                onClick={() => setOpen(false)}
               >
                 Utilisateurs
               </Link>

@@ -17,7 +17,7 @@ export default function ContactMessagesList() {
       id: 1,
       name: "Camille Dupont",
       email: "camille@example.com",
-      message: "Bonjour, j’aimerais en savoir plus sur l’admission.",
+      message: "Bonjour, j'aimerais en savoir plus sur l'admission.",
     },
     {
       id: 2,
