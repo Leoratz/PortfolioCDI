@@ -15,7 +15,7 @@ type ProjectsProps = {
 
 const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnected, onToggleVisibility }) => {
   return (
-    <div className =" bg-gray-100 py-6 flex flex-col gap-4 lg:px-18 md:px-10 px-4">
+    <div className =" bg-gray-100 py-6 flex flex-col gap-4 lg:px-18 md:px-10 px-4" id="projects">
       <div className=" flex flex-col justify-center items-center gap-1 py-4">
           <p className=" font-semibold text-sm text-center uppercase"> Découvrez plus</p>
           <p className=" font-bold text-2xl text-center">Visitez nos différents projets </p>
