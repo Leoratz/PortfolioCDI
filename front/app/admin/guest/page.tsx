@@ -56,7 +56,7 @@ export default function ContactMessagesList() {
       );
 
       if (response.ok) {
-        setResponse("Projet supprimé avec succès");
+        setResponse("Message supprimé avec succès");
         setGuests((prevGuests) =>
           prevGuests.filter((guest) => Number(guest.id) !== Number(id))
         );

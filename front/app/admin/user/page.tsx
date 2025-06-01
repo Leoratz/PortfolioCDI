@@ -6,25 +6,55 @@ import { useEffect, useState } from "react";
 import { getToken } from "@/utils/jwt";
 import { getData } from "@/actions/getData";
 
+type DecodedToken = {
+  email: string;
+  roles : string[];
+}
+
 const AdminsPage = () => {
   const [data, setData] = useState<{users: User[];} | null>(null);
+
+  const datas = async () => {
+      const data = await getData();
+      setData(data);
+    };
   
-    const datas = async () => {
-        const data = await getData();
-        setData(data);
-      };
-    
-      useEffect(() => {
-        datas();
-      }, []);
+  useEffect(() => {
+    datas();
+  }, []);
 
 
   const handleEdit = (admin: User) => {
     console.log("Modifier", admin);
   };
 
-  const handleDelete = (id: number) => {
-    setAdmins((prev) => prev.filter((a) => a.id !== id));
+  const handleDelete = async (id: number) => {
+    const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cet administrateur ?");
+    if (!confirmDelete) return;
+
+    try {
+      const token = await getToken();
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        setData((prev) =>
+          prev
+            ? {
+                ...prev,
+                users: prev.users.filter((user) => user.id !== id),
+              }
+            : null
+        );
+      } else {
+        throw new Error("Suppression refusée ou échouée");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la suppression :", error);
+    }
   };
 
   return (
