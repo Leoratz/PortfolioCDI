@@ -25,7 +25,7 @@ export default function ContactMessagesList() {
         }
       );
       const data = await res.json();
-      console.log("Guests data:", data);
+
       setGuests(data as Guest[]);
     } catch (error) {
       console.error(error);

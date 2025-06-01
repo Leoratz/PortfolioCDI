@@ -4,7 +4,6 @@ import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { User } from "@/types/user";
-import { useEffect } from "react";
 
 type AdminCardProps = {
   admin: User;
@@ -13,9 +12,6 @@ type AdminCardProps = {
 };
 
 const AdminCard: React.FC<AdminCardProps> = ({ admin, onEdit, onDelete }) => {
-  useEffect(() => {
-    console.log(admin);
-  });
 
   return (
     <article

@@ -15,7 +15,6 @@ export default function ProjectDetails() {
         `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${id}`
       );
       const data = await res.json();
-      console.log(data);
       setProject(data as Project);
     } catch (error) {
       console.error(error);
