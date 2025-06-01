@@ -1,7 +1,8 @@
 export type Guest = {
     id: number;
-    lastname: string;
-    firstname: string;
+    lastName: string;
+    firstName: string;
+    email: string;
     details: string;
     status: string;
 };

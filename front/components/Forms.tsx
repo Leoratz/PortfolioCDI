@@ -35,7 +35,7 @@ export default function Forms() {
       await response.json();
 
       if (response.ok) {
-        setResponse("Projet ajouté avec succès");
+        setResponse("Votre demande de contact a été envoyée avec succès");
         form.reset();
       }
     } catch (error) {

@@ -1,40 +1,78 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import EditContactModal from "@/components/EditContactModal";
-
-type ContactMessage = {
-  id: number;
-  name: string;
-  email: string;
-  message: string;
-};
+import { getToken } from "@/utils/jwt";
+import { Guest } from "@/types/guest";
 
 export default function ContactMessagesList() {
-  const [messages, setMessages] = useState<ContactMessage[]>([
-    {
-      id: 1,
-      name: "Camille Dupont",
-      email: "camille@example.com",
-      message: "Bonjour, j'aimerais en savoir plus sur l'admission.",
-    },
-    {
-      id: 2,
-      name: "Marc Lemoine",
-      email: "marc@example.com",
-      message: "Comment postuler à votre programme ?",
-    },
-  ]);
+  const [guests, setGuests] = useState<Guest[]>([]);
+  const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
+  const [response, setResponse] = useState("");
 
-  const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
+  const getGuests = async () => {
+    try {
+      const token = await getToken();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/guests`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log("Guests data:", data);
+      setGuests(data as Guest[]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  const handleDelete = (id: number) => {
-    setMessages(messages.filter((msg) => msg.id !== id));
+  useEffect(() => {
+    getGuests();
+  }, []);
+
+  const handleDelete = async (id: number) => {
+    const confirmDelete = confirm(
+      "Êtes-vous sûr(e) de vouloir supprimer ce message ?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const token = await getToken();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/guests/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        setResponse("Projet supprimé avec succès");
+        setGuests((prevGuests) =>
+          prevGuests.filter((guest) => Number(guest.id) !== Number(id))
+        );
+      }
+    } catch (e) {
+      console.error("Error:", e);
+      setResponse(
+        "Une erreur est survenue lors de la suppression. Veuillez réessayer"
+      );
+    }
   };
 
-  const handleUpdate = (updated: ContactMessage) => {
-    setMessages(messages.map((msg) => (msg.id === updated.id ? updated : msg)));
+  const handleUpdate = (updated: Guest) => {
+    setGuests((oldGuests) =>
+      oldGuests.map((guest) => (guest.id === updated.id ? updated : guest))
+    );
   };
 
   return (
@@ -45,33 +83,33 @@ export default function ContactMessagesList() {
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {messages.map((msg) => (
+        {guests.map((guest) => (
           <article
-            key={msg.id}
+            key={guest.id}
             className="bg-white p-4 rounded-xl shadow-md border border-orange-500 hover:scale-105 transition-transform"
           >
             <div className="flex justify-end gap-2 mb-2">
-              <button onClick={() => setSelectedMessage(msg)} aria-label={`Modifier ${msg.name}`}>
+              <button onClick={() => setSelectedGuest(guest)} aria-label={`Modifier ${guest.lastName}`}>
                 <AiFillEdit className="w-5 h-5 text-gray-600 hover:text-orange-500" />
               </button>
-              <button onClick={() => handleDelete(msg.id)} aria-label={`Supprimer ${msg.name}`}>
+              <button onClick={() => handleDelete(guest.id)} aria-label={`Supprimer ${guest.lastName}`}>
                 <FaRegTrashAlt className="w-5 h-5 text-gray-600 hover:text-red-500" />
               </button>
             </div>
-            <p className="text-sm"><strong>Nom :</strong> {msg.name}</p>
-            <p className="text-sm"><strong>Email :</strong> {msg.email}</p>
-            <p className="text-sm"><strong>Message :</strong> {msg.message}</p>
+            <p className="text-sm"><strong>Nom :</strong> {guest.firstName} {guest.lastName}</p>
+            <p className="text-sm"><strong>Email :</strong> {guest.email}</p>
+            <p className="text-sm"><strong>Message :</strong> {guest.details}</p>
           </article>
         ))}
       </section>
 
-      {selectedMessage && (
+      {/* {selectedGuest && (
         <EditContactModal
-          message={selectedMessage}
-          onClose={() => setSelectedMessage(null)}
+          message={selectedGuest}
+          onClose={() => setSelectedGuest(null)}
           onSave={handleUpdate}
         />
-      )}
+      )} */}
     </main>
   );
 }
