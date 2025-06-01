@@ -181,7 +181,7 @@ export default function AddProject() {
       const data = await response.json();
       if (response.ok) {
         setResponse("Projet ajouté avec succès");
-        router.push(`/admin/project/${data.id}`);
+        router.push(`/`);
       } else {
         console.error(data);
         setResponse(data.description || "Echec lors de la création du projet");
