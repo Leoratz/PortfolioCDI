@@ -29,8 +29,8 @@ class UserPasswordChangeService implements ProcessorInterface
             throw new \Exception('You can only change your own password.');
         }
 
-        if ($data->getPlainPassword() !== null && !!$data->getPlainPassword() == "") {
-            throw new \Exception("The new password shouldn't be empty");
+        if ($data->getPlainPassword() === null && !!$data->getPlainPassword() == "") {
+            return $data;
         }
 
         $data = $this->passwordHasherProcessor->process($data, $operation, $uriVariables, $context);

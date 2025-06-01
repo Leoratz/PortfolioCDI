@@ -57,7 +57,13 @@ const AdminCard: React.FC<AdminCardProps> = ({ admin, onEdit, onDelete }) => {
         </p>
         <p>
           <span className="font-semibold text-gold-700">Rôles :</span>{" "}
-          {admin.roles.join(", ")}
+          {admin.roles
+            .map((role) => {
+              if (role === "ROLE_USER") return "Utilisateur";
+              if (role === "ROLE_ADMIN") return "Administrateur";
+              return role;
+            })
+            .join(", ")}
         </p>
       </div>
     </article>
