@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import { getToken } from "@/utils/jwt";
 import { getData } from "@/actions/getData";
 import EditUserModal from "@/components/EditUserModal";
+import { useRouter } from "next/navigation";
 
 const AdminsPage = () => {
   const [data, setData] = useState<{ users: User[] } | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+
+  const router = useRouter();
 
   const datas = async () => {
     const data = await getData();
@@ -60,7 +63,21 @@ const AdminsPage = () => {
 
   return (
     <div className="w-full">
-      <h1 className="text-xl sm:text-2xl font-bold text-gold-700 mb-6">Gestion des administrateurs</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-center m-8 gap-4 px-2 sm:px-8">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-orange-600 tracking-tight">
+          Gestion des administrateurs
+        </h1>
+        <button
+          onClick={() => router.push("/admin/user/add")}
+          className="flex items-center gap-2 text-white bg-orange-500 py-2 px-6 rounded-full font-semibold shadow hover:bg-orange-600 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
+          Ajouter un administrateur
+        </button>
+      </div>
+
       <AdminsList admins={data?.users} onEdit={handleEdit} onDelete={handleDelete} />
 
       {editingUser && (
