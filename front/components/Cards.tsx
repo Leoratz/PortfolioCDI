@@ -10,6 +10,7 @@ type CardProps = {
   onEdit: (project: Project) => void;
   onDelete: () => void;
   isConnected: boolean;
+  onToggleVisibility: (project: Project) => void;
 };
 
 export default function Cards({
@@ -17,6 +18,7 @@ export default function Cards({
   onEdit,
   onDelete,
   isConnected,
+  onToggleVisibility,
 }: CardProps) {
   return (
     <div className="flex flex-col justify-between gap-2 bg-white shadow-md rounded-lg p-4 m-2 h-auto hover:scale-105 transition-transform duration-300">
@@ -49,6 +51,14 @@ export default function Cards({
                 <div className="group bg-gray-700 border border-gray-700 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
                   <AiFillEdit className="h-6 w-6 text-white group-hover:text-gray-700 group-focus:text-gray-700 transition-colors duration-200" />
                 </div>
+              </button>
+              <button
+                onClick={() => onToggleVisibility(project)}
+                className={`mt-2 text-sm font-semibold ${
+                  project.visibility ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {project.visibility ? "Rendre invisible" : "Rendre visible"}
               </button>
               <button
                 onClick={onDelete}

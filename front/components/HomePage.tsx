@@ -102,6 +102,42 @@ export default function HomePage() {
     }
   };
 
+  const handleToggleVisibility = async (project: Project) => {
+    try {
+      const token = await getToken();
+      
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${project.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/merge-patch+json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: project.title,
+            details: project.details,
+            year: project.year,
+            stack: project.stack,
+            visibility: !project.visibility,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if (!response.ok){
+        console.error("Erreur API détails:", data);
+        throw new Error("Erreur lors de la mise à jour");
+      } 
+
+      setProjects((prev) =>
+        prev.map((p) => (p.id === data.id ? data : p))
+      );
+    } catch (error) {
+      console.error("Erreur changement de visibilité :", error);
+    }
+  };
+
   return (
     <div className="relative">
       <HomePresentation />
@@ -110,6 +146,7 @@ export default function HomePage() {
         projects={projects}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onToggleVisibility={handleToggleVisibility}
         isConnected={isLogged}
       />
       <Forms />

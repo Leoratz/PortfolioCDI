@@ -4,17 +4,16 @@ import React from "react";
 
 import { Project } from "@/types/project"; 
 
-import Link from "next/link";
-
 type ProjectsProps = {
   projects: Project[];
   onEdit: (project: Project) => void;
   onDelete: (projectId: number) => void; 
   isConnected: boolean
+  onToggleVisibility: (project: Project) => void;
 };
 
 
-const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnected }) => {
+const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnected, onToggleVisibility }) => {
   return (
     <div className =" bg-gray-100 py-6 flex flex-col gap-4 lg:px-18 md:px-10 px-4">
       <div className=" flex flex-col justify-center items-center gap-1 py-4">
@@ -37,6 +36,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnec
                 onEdit={onEdit}
                 onDelete={() => onDelete(project.id)}
                 isConnected={isConnected}
+                onToggleVisibility={onToggleVisibility}
               />
             ))
         )}
