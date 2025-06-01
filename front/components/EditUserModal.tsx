@@ -107,13 +107,13 @@ export default function EditUserModal({ user, onClose, onSave }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              className="px-4 py-2 bg-gray-300 rounded hover:bg-white cursor-pointer focus:bg-gray-400 hover:text-gray-500 focus:text-white transition-colors duration-200 text-gray-700 border border-gray-500"
             >
               Annuler
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+              className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
             >
               Enregistrer
             </button>

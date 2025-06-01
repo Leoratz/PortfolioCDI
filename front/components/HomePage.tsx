@@ -139,7 +139,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <HomePresentation />
       <Programs listPrograms={listPrograms} />
       <Projects

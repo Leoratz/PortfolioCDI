@@ -102,7 +102,7 @@ export default function ContactMessagesList() {
   };
 
   return (
-    <main className="p-6 bg-gray-100">
+    <main className="p-6 bg-gray-100 w-full">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold text-orange-500">Messages de contact</h1>
         <p className="text-gray-600">Liste des personnes ayant tenté de nous contacter</p>
@@ -120,11 +120,17 @@ export default function ContactMessagesList() {
             `}
           >
             <div className="flex justify-end gap-2 mb-2">
-              <button onClick={() => setSelectedGuest(guest)} aria-label={`Modifier ${guest.lastName}`}>
-                <AiFillEdit className="w-5 h-5 text-gray-600 hover:text-orange-500" />
+              <button 
+                className="group bg-gray-500 border border-gray-500 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer"
+                onClick={() => setSelectedGuest(guest)} aria-label={`Modifier ${guest.lastName}`}
+              >
+                <AiFillEdit className="h-6 w-6 text-white group-hover:text-gray-500 group-focus:text-gray-500 transition-colors duration-200" />
               </button>
-              <button onClick={() => handleDelete(guest.id)} aria-label={`Supprimer ${guest.lastName}`}>
-                <FaRegTrashAlt className="w-5 h-5 text-gray-600 hover:text-red-500" />
+              <button 
+                className="group bg-red-600 border border-red-600 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer"
+                onClick={() => handleDelete(guest.id)} aria-label={`Supprimer ${guest.lastName}`}
+              >
+                <FaRegTrashAlt className="h-6 w-6 text-white group-hover:text-red-600 group-focus:text-red-600 transition-colors duration-200" />
               </button>
             </div>
             <p className="text-sm"><strong>Nom :</strong> {guest.firstName} {guest.lastName}</p>

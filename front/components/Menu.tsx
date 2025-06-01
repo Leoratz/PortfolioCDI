@@ -68,7 +68,7 @@ export default function Menu() {
           <li role="none">
             <Link
               href="/login"
-              className="text-white bg-orange-500 py-2 px-4 rounded-3xl font-semibold hover:bg-orange-600 transition-colors"
+              className="text-white bg-orange-500 py-2 px-4 rounded-3xl font-semibold hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
               role="menuitem"
               tabIndex={0}
               aria-label="Connexion"
@@ -107,7 +107,7 @@ export default function Menu() {
             <li role="none">
               <button
                 onClick={handleLogout}
-                className="text-white bg-orange-500 py-2 px-4 rounded-3xl font-semibold hover:bg-orange-600 transition-colors"
+                className="text-white bg-orange-500 py-2 px-4 rounded-3xl font-semibold hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
                 role="menuitem"
                 tabIndex={0}
                 aria-label="Déconnexion"

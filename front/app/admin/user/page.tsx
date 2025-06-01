@@ -115,7 +115,7 @@ export default function AdminsPage() {
         </h1>
         <button
           onClick={() => router.push("/admin/students/add")}
-          className="flex items-center gap-2 text-white bg-orange-500 py-2 px-6 rounded-full font-semibold shadow hover:bg-orange-600 transition-colors"
+          className="flex items-center gap-2 text-white bg-orange-500 py-2 px-6 rounded-full font-semibold shadow hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -124,7 +124,7 @@ export default function AdminsPage() {
         </button>
         <button
           onClick={() => router.push("/admin/user/add")}
-          className="flex items-center gap-2 text-white bg-orange-500 py-2 px-6 rounded-full font-semibold shadow hover:bg-orange-600 transition-colors"
+          className="flex items-center gap-2 text-white bg-orange-500 py-2 px-6 rounded-full font-semibold shadow hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

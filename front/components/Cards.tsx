@@ -36,7 +36,7 @@ export default function Cards({
         <p className="text-sm text-gray-600">{project.details}</p>
         <div className="flex items-center justify-between">
           <Link
-            className="focus:outline-offset-2 bg-orange-500 w-fit p-2 font-semibold rounded text-white text-sm"
+            className="bg-orange-500 w-fit p-2 font-semibold rounded text-white text-sm hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
             href={`/project/${project.id}`}
             rel="noopener noreferrer"
           >
@@ -45,16 +45,8 @@ export default function Cards({
           {isConnected && (
             <div className="flex justify-end gap-4">
               <button
-                onClick={() => onEdit(project)}
-                aria-label="Modifier le projet"
-              >
-                <div className="group bg-gray-700 border border-gray-700 p-1.5 rounded-md hover:bg-white focus:bg-white transition-colors duration-200 hover:cursor-pointer">
-                  <AiFillEdit className="h-6 w-6 text-white group-hover:text-gray-700 group-focus:text-gray-700 transition-colors duration-200" />
-                </div>
-              </button>
-              <button
                 onClick={() => onToggleVisibility(project)}
-                className={`mt-2 text-sm font-semibold ${
+                className={`mt-2 text-sm font-semibold hover:underline cursor-pointer ${
                   project.visibility ? "text-green-600" : "text-red-600"
                 }`}
               >

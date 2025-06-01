@@ -437,7 +437,7 @@ export default function AddProject() {
 
         <button
           type="submit"
-          className="bg-orange-500 text-white rounded px-4 py-1 hover:bg-orange-600 transition-colors"
+          className="bg-orange-500 text-white rounded px-4 py-1 hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500"
           disabled={loading}
         >
           {loading ? "Traitement en cours..." : "Ajouter"}

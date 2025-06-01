@@ -113,7 +113,7 @@ export default function AddStudent() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-orange-500 rounded px-4 py-2 hover:bg-orange-600 transition-colors text-white font-semibold w-full disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-orange-500 rounded px-4 py-2 hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
           >
             {loading ? "Ajout en cours..." : "Ajouter"}
           </button>

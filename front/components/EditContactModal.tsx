@@ -75,10 +75,10 @@ export default function EditContactModal({ message, onClose, onSave }: Props) {
           </select>
 
           <div className="flex justify-between mt-4">
-            <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded">
+            <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white ">
               Enregistrer
             </button>
-            <button type="button" onClick={onClose} className="text-gray-600 hover:underline">
+            <button type="button" onClick={onClose} className="text-gray-600 hover:underline cursor-pointer">
               Annuler
             </button>
           </div>

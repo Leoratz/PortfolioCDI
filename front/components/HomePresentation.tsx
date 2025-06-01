@@ -12,8 +12,8 @@ export default function HomePresentation() {
                         <p className="text-center text-white text-lg w-4/6 mt-2">Une formation informatique de pointe conçue pour vous préparer aux rôles les plus demandés du secteur technologique.</p>
                 </div>
                 <div className="flex gap-4 mt-4">
-                    <button className="bg-black text-white text-lg px-6 py-2 rounded-lg hover:bg-gray-700 focus:outline-2"> <a href="#projects"> Explorer </a></button>
-                    <button className="bg-orange-500 text-white text-lg px-6 py-2 rounded-lg hover:bg-orange-600 focus:outline-2"> <a href="#formulaire"> S&apos;inscrire</a> </button>
+                    <button className="bg-black text-white text-lg px-6 py-2 rounded-lg hover:bg-white focus:bg-white hover:text-black focus:text-black transition-colors duration-200 cursor-pointer border border-black text-white"> <a href="#projects"> Explorer </a></button>
+                    <button className="bg-orange-500 text-white text-lg px-6 py-2 rounded-lg hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"> <a href="#formulaire"> S&apos;inscrire</a> </button>
                 </div>
            </div>
         </div>

@@ -184,7 +184,7 @@ export default function Forms() {
             <div className="mt-4">
               {response ? <p>{response}</p> : ""}
               <button
-                className="bg-orange-500 text-white p-2 rounded w-fit mt-1"
+                className="bg-orange-500 text-white p-2 rounded w-fit mt-1 hover:bg-white focus:bg-white hover:text-orange-500 focus:text-orange-500 transition-colors duration-200 cursor-pointer border border-orange-500 text-white"
                 type="submit"
                 disabled={loading}
               >

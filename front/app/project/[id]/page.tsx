@@ -73,7 +73,7 @@ export default function ProjectDetails() {
                   className="flex items-center gap-2"
                 >
                   <p className=" text-black bg-green-700/15 px-2 py-1 rounded-2xl">
-                    {project?.stack}
+                    {technology}
                   </p>
                 </div>
               ))}
