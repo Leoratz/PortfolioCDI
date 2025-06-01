@@ -43,20 +43,12 @@ class Guest
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z]+$/',
-        message: 'Le nom de famille ne peut contenir que des lettres.'
-    )]
     private ?string $lastName = null;
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z]+$/',
-        message: 'Le prénom ne peut contenir que des lettres.'
-    )]
     private ?string $firstName = null;
 
     #[Groups(['read', 'write'])]
@@ -69,10 +61,6 @@ class Guest
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 10, max : 5000)]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9\s.,;:!?()\-]+$/',
-        message: 'The details can only contain letters, numbers, and basic punctuation.'
-    )]
     private ?string $details = null;
 
     #[Groups(['read', 'write'])]

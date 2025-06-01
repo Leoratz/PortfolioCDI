@@ -53,10 +53,6 @@ class Project
     #[Assert\NotBlank(message:  'The details cannot be blank.')]
     #[Assert\Length(min: 10, max : 5000)]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9\s.,;:!?()\-]+$/',
-        message: 'The details can only contain letters, numbers, and basic punctuation.'
-    )]
-    #[Assert\Regex(
         pattern: '/^[^<>]*$/',
         message: 'The details cannot contain HTML tags.'
     )]

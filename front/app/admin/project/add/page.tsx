@@ -102,10 +102,6 @@ export default function AddProject() {
     } else if (formDetails.length < 10 || formDetails.length > 5000) {
       newErrors.details = "La description doit contenir entre 10 et 5000 caractères.";
     } else {
-      const basicPunctuationRegex = /^[a-zA-Z0-9\s.,;:!?()\-]+$/;
-      if (!basicPunctuationRegex.test(formDetails)) {
-        newErrors.details = "La description contient des caractères non autorisés.";
-      }
       const noHtmlTagsRegex = /^[^<>]*$/;
       if (!noHtmlTagsRegex.test(formDetails)) {
         newErrors.details = "La description ne peut pas contenir de balises HTML.";
