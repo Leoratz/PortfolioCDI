@@ -15,3 +15,5 @@
 ###< lexik/jwt-authentication-bundle ###
 
 /public/uploads/
+
+/_node_modules_temp/
