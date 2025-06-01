@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 01 juin 2025 à 21:04
+-- Généré le : dim. 01 juin 2025 à 21:06
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -82,15 +82,8 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `project_id`, `file_path`) VALUES
-(7, NULL, 'wallpaperflare-com-wallpaper-68397608ef9fa209259108.jpg'),
-(10, NULL, 'the-rolling-stones-logo-68399753a5c8b840037483.png'),
-(13, NULL, 'iim-683c7029a3650343033743.png'),
-(14, NULL, 'wallpaperflare-com-wallpaper-683c705e6755c019578481.jpg'),
-(15, NULL, 'wallpaper3-683c72c0a6eb7328475191.jpg'),
-(25, NULL, 'wallpaper3-683cb750da608890984509.jpg'),
 (29, 22, 'arton103809-683cbb70a9097767736533.png'),
 (30, 22, 'visuel-api-683cbb71053b1423265505.png'),
-(31, NULL, 'images22-683cbc5d6b13f298199981.jpg'),
 (32, 23, 'images22-683cbccbe4b0f656088089.jpg'),
 (33, 24, 'github-683cbdd86a06e021886833.png');
 
