@@ -89,7 +89,7 @@ export default function ContactMessagesList() {
       const data = await response.json();
 
       if (!response.ok) {
-        console.error("Détails erreur API :", data); // <-- Ajout ici
+        console.error("Détails erreur API :", data);
         throw new Error(data.message || "Erreur lors de la mise à jour");
       }
 

@@ -23,9 +23,23 @@ const Projects: React.FC<ProjectsProps> = ({ projects, onEdit, onDelete,isConnec
           <p className=" font-normal text-md text-center text-gray-600 lg:w-1/2 md:w-1/2  w-full">Nos étudiants travaillent sur des projets réels afin de mettre en avant leur compétences et leur créativité.</p>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {projects.filter((project) => project.visibility || isConnected).map((project) => (
-          <Cards key={project.id} project={project} onEdit={onEdit} onDelete={() => onDelete(project.id)} isConnected={isConnected} />
-        ))}
+        {projects.filter((p) => p.visibility || isConnected).length === 0 ? (
+          <p className="col-span-full text-center text-gray-500 text-lg py-8">
+            Aucun projet à afficher.
+          </p>
+        ) : (
+          projects
+            .filter((p) => p.visibility || isConnected)
+            .map((project) => (
+              <Cards
+                key={project.id}
+                project={project}
+                onEdit={onEdit}
+                onDelete={() => onDelete(project.id)}
+                isConnected={isConnected}
+              />
+            ))
+        )}
       </div>
     </div>
   );

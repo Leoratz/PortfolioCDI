@@ -5,27 +5,27 @@ import { User } from "@/types/user";
 import { useEffect, useState } from "react";
 import { getToken } from "@/utils/jwt";
 import { getData } from "@/actions/getData";
-
-type DecodedToken = {
-  email: string;
-  roles : string[];
-}
+import EditUserModal from "@/components/EditUserModal";
 
 const AdminsPage = () => {
-  const [data, setData] = useState<{users: User[];} | null>(null);
+  const [data, setData] = useState<{ users: User[] } | null>(null);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   const datas = async () => {
-      const data = await getData();
-      setData(data);
-    };
-  
+    const data = await getData();
+    setData(data);
+  };
+
   useEffect(() => {
     datas();
   }, []);
 
+  const handleEdit = (user: User) => {
+    setEditingUser(user);
+  };
 
-  const handleEdit = (admin: User) => {
-    console.log("Modifier", admin);
+  const handleUpdate = async (updated: User) => {
+    console.log("modified user:", updated);
   };
 
   const handleDelete = async (id: number) => {
@@ -52,8 +52,9 @@ const AdminsPage = () => {
       } else {
         throw new Error("Suppression refusée ou échouée");
       }
-    } catch (error) {
-      console.error("Erreur lors de la suppression :", error);
+    } catch (e: any) {
+      alert("Vous n'êtes pas autorisé à supprimer cet administrateur.");
+      console.error("Erreur lors de la suppression :", e);
     }
   };
 
@@ -61,6 +62,14 @@ const AdminsPage = () => {
     <div className="w-full">
       <h1 className="text-xl sm:text-2xl font-bold text-gold-700 mb-6">Gestion des administrateurs</h1>
       <AdminsList admins={data?.users} onEdit={handleEdit} onDelete={handleDelete} />
+
+      {editingUser && (
+        <EditUserModal
+          user={editingUser}
+          onClose={() => setEditingUser(null)}
+          onSave={handleUpdate}
+        />
+      )}
     </div>
   );
 };
