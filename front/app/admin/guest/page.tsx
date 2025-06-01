@@ -69,10 +69,36 @@ export default function ContactMessagesList() {
     }
   };
 
-  const handleUpdate = (updated: Guest) => {
-    setGuests((oldGuests) =>
-      oldGuests.map((guest) => (guest.id === updated.id ? updated : guest))
-    );
+  const handleUpdate = async (updated: Guest) => {
+    try {
+      const token = await getToken();
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/guests/${updated.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/merge-patch+json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status: updated.status,
+          }),
+        }
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Détails erreur API :", data); // <-- Ajout ici
+        throw new Error(data.message || "Erreur lors de la mise à jour");
+      }
+
+      setGuests((prev) =>
+        prev.map((guest) => (guest.id === data.id ? data : guest))
+      );
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour :", error);
+    }
   };
 
   return (
@@ -86,7 +112,12 @@ export default function ContactMessagesList() {
         {guests.map((guest) => (
           <article
             key={guest.id}
-            className="bg-white p-4 rounded-xl shadow-md border border-orange-500 hover:scale-105 transition-transform"
+            className={`bg-white p-4 rounded-xl shadow-md transition-transform hover:scale-105
+              ${guest.status === "pending" ? "border-red-500" : ""}
+              ${guest.status === "onGoing" ? "border-orange-500" : ""}
+              ${guest.status === "done" ? "border-green-500" : ""}
+              border-2
+            `}
           >
             <div className="flex justify-end gap-2 mb-2">
               <button onClick={() => setSelectedGuest(guest)} aria-label={`Modifier ${guest.lastName}`}>
@@ -103,13 +134,13 @@ export default function ContactMessagesList() {
         ))}
       </section>
 
-      {/* {selectedGuest && (
+      {selectedGuest && (
         <EditContactModal
           message={selectedGuest}
           onClose={() => setSelectedGuest(null)}
           onSave={handleUpdate}
         />
-      )} */}
+      )}
     </main>
   );
 }

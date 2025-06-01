@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
-
-type ContactMessage = {
-  id: number;
-  name: string;
-  email: string;
-  message: string;
-};
+import { Guest } from "@/types/guest";
 
 type Props = {
-  message: ContactMessage | null;
+  message: Guest | null;
   onClose: () => void;
-  onSave: (updated: ContactMessage) => void;
+  onSave: (updated: Guest) => void;
 };
 
 export default function EditContactModal({ message, onClose, onSave }: Props) {
-  const [formData, setFormData] = useState<ContactMessage | null>(null);
+  const [formData, setFormData] = useState<Guest | null>(null);
 
   useEffect(() => {
     setFormData(message);
@@ -22,8 +16,8 @@ export default function EditContactModal({ message, onClose, onSave }: Props) {
 
   if (!message || !formData) return null;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value } as ContactMessage);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value } as Guest);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,32 +33,46 @@ export default function EditContactModal({ message, onClose, onSave }: Props) {
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <label htmlFor="name">Nom :</label>
           <input
-            className="border rounded p-2"
+            className="border rounded p-2 bg-gray-100"
             type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
+            value={formData.lastName}
+            disabled
           />
-
-          <label htmlFor="email">Email :</label>
+          <label>Prénom :</label>
           <input
-            className="border rounded p-2"
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
+            className="border rounded p-2 bg-gray-100"
+            type="text"
+            value={formData.firstName}
+            disabled
           />
 
-          <label htmlFor="message">Message :</label>
-          <textarea
-            className="border rounded p-2"
-            name="message"
-            id="message"
-            value={formData.message}
-            onChange={handleChange}
+          <label>Email :</label>
+          <input
+            className="border rounded p-2 bg-gray-100"
+            type="email"
+            value={formData.email}
+            disabled
           />
+
+          <label>Message :</label>
+          <textarea
+            className="border rounded p-2 bg-gray-100"
+            value={formData.details}
+            disabled
+          />
+
+          <label htmlFor="status">Statut :</label>
+          <select
+            className="border rounded p-2"
+            name="status"
+            id="status"
+            value={formData.status}
+            onChange={handleChange}
+          >
+            <option value="pending">En attente</option>
+            <option value="onGoing">En cours</option>
+            <option value="done">Traité</option>
+          </select>
 
           <div className="flex justify-between mt-4">
             <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded">
