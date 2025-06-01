@@ -65,7 +65,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Groups('write')]
-    #[Assert\NotBlank]
     private ?string $plainPassword = null;
 
     #[Groups(['read', 'write'])]
@@ -121,7 +120,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);

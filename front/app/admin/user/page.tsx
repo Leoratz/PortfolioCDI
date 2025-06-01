@@ -7,9 +7,11 @@ import { getToken } from "@/utils/jwt";
 import { getData } from "@/actions/getData";
 import EditUserModal from "@/components/EditUserModal";
 
-const AdminsPage = () => {
+export default function AdminsPage() {
   const [data, setData] = useState<{ users: User[] } | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [response, setResponse] = useState("");
 
   const datas = async () => {
     const data = await getData();
@@ -24,8 +26,52 @@ const AdminsPage = () => {
     setEditingUser(user);
   };
 
-  const handleUpdate = async (updated: User) => {
-    console.log("modified user:", updated);
+  const handleUpdate = async (updatedUser: User) => {
+    try {
+      const token = await getToken();
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/${updatedUser.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/merge-patch+json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            email: updatedUser.email,
+            plainPassword: updatedUser.plainPassword,
+            roles: selectedRoles
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        setResponse("Utilisateur mis à jour avec succès");
+  
+        setData((prev) =>
+          prev
+            ? {
+                ...prev,
+                users: prev.users.map((user) =>
+                  user.id === updatedUser.id ? { ...user, ...updatedUser } : user
+                ),
+              }
+            : null
+        );
+  
+        setEditingUser(null);
+      } else {
+        console.error(data);
+        setResponse(data.description || "Echec lors de la création du projet");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setResponse("Une erreur est survenue");
+    }
   };
 
   const handleDelete = async (id: number) => {
@@ -67,11 +113,11 @@ const AdminsPage = () => {
         <EditUserModal
           user={editingUser}
           onClose={() => setEditingUser(null)}
-          onSave={handleUpdate}
+          onSave={(updatedUser) => handleUpdate(updatedUser)}
+          setSelectedRoles={setSelectedRoles}
+          response={response}
         />
       )}
     </div>
   );
-};
-
-export default AdminsPage;
+}
