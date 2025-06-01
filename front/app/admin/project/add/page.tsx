@@ -25,6 +25,12 @@ export default function AddProject() {
   const [loading, setLoading] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string | undefined>();
 
+  const [formTitle, setFormTitle] = useState("");
+  const [formDetails, setFormDetails] = useState("");
+  const [formLink, setFormLink] = useState("");
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const datas = async () => {
     const data = await getData();
     setData(data);
@@ -80,8 +86,67 @@ export default function AddProject() {
     }
   };
 
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    // Titre
+    if (!formTitle.trim()) {
+      newErrors.title = "Le titre ne peut pas être vide.";
+    } else if (formTitle.length < 4 || formTitle.length > 255) {
+      newErrors.title = "Le titre doit contenir entre 4 et 255 caractères.";
+    }
+
+    // Details
+    if (!formDetails.trim()) {
+      newErrors.details = "La description ne peut pas être vide.";
+    } else if (formDetails.length < 10 || formDetails.length > 5000) {
+      newErrors.details = "La description doit contenir entre 10 et 5000 caractères.";
+    } else {
+      const basicPunctuationRegex = /^[a-zA-Z0-9\s.,;:!?()\-]+$/;
+      if (!basicPunctuationRegex.test(formDetails)) {
+        newErrors.details = "La description contient des caractères non autorisés.";
+      }
+      const noHtmlTagsRegex = /^[^<>]*$/;
+      if (!noHtmlTagsRegex.test(formDetails)) {
+        newErrors.details = "La description ne peut pas contenir de balises HTML.";
+      }
+    }
+
+    // Students
+    if (selectedStudents.length === 0) {
+      newErrors.students = "Veuillez sélectionner au moins un étudiant.";
+    }
+
+    // Year
+    const yearNumber = Number(selectedYear);
+    if (!selectedYear || isNaN(yearNumber) || yearNumber < 1 || yearNumber > 5) {
+      newErrors.year = "L'année doit être comprise entre 1 et 5.";
+    }
+
+    // Stack
+    if (stack.length === 0) {
+      newErrors.stack = "La liste des technologies doit contenir au moins un élément.";
+    }
+
+    // Media
+    if (media.length === 0) {
+      newErrors.media = "Veuillez uploader au moins une image.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setResponse("");
+
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -116,7 +181,7 @@ export default function AddProject() {
       const data = await response.json();
       if (response.ok) {
         setResponse("Projet ajouté avec succès");
-        router.push(`/admin/project/${data.id}`);
+        router.push(`/`);
       } else {
         console.error(data);
         setResponse(data.description || "Echec lors de la création du projet");
@@ -151,9 +216,16 @@ export default function AddProject() {
               type="text"
               id="title"
               name="title"
-              className="border border-gray-300 rounded px-3 py-1 text-black bg-white focus:outline-orange-500"
+              className={`border rounded px-3 py-1 text-black bg-white focus:outline-orange-500 ${
+                errors.title ? "border-red-500" : "border-gray-300"
+              }`}
               readOnly={loading}
+              value={formTitle}
+              onChange={(e) => setFormTitle(e.target.value)}
             />
+            {errors.title && (
+              <div className="text-red-500 text-sm mt-1">{errors.title}</div>
+            )}
           </div>
 
           <div className="flex flex-col justify-between">
@@ -186,9 +258,16 @@ export default function AddProject() {
           <textarea
             id="details"
             name="details"
-            className="border border-gray-300 rounded px-3 py-1 text-black focus:outline-orange-500 bg-white"
+            className={`border rounded px-3 py-1 text-black focus:outline-orange-500 bg-white ${
+              errors.details ? "border-red-500" : "border-gray-300"
+            }`}
             readOnly={loading}
+            value={formDetails}
+            onChange={(e) => setFormDetails(e.target.value)}
           ></textarea>
+          {errors.details && (
+            <div className="text-red-500 text-sm mt-1">{errors.details}</div>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -216,9 +295,13 @@ export default function AddProject() {
                 .toLowerCase()
                 .includes(input.toLowerCase())
             }
+            value={selectedStudents}
             onChange={(value) => setSelectedStudents(value)}
             disabled={loading}
           />
+          {errors.students && (
+            <div className="text-red-500 text-sm mt-1">{errors.students}</div>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -274,6 +357,9 @@ export default function AddProject() {
               5ème année
             </option>
           </select>
+          {errors.year && (
+            <div className="text-red-500 text-sm mt-1">{errors.year}</div>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -309,6 +395,9 @@ export default function AddProject() {
               className="border-none focus:outline-none"
               disabled={loading}
             />
+            {errors.stack && (
+              <div className="text-red-500 text-sm mt-1">{errors.stack}</div>
+            )}
           </div>
         </div>
 

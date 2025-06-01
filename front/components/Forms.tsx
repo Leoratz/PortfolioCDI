@@ -47,7 +47,7 @@ export default function Forms() {
   };
 
   return (
-    <div className="w-full bg-white flex flex-col gap-6 p-4">
+    <div className="w-full bg-white flex flex-col gap-6 p-4" id="formulaire">
       <div className="flex flex-col justify-center items-center gap-2 py-10">
         <p className="font-semibold text-sm text-center uppercase">
           Contactez-nous
